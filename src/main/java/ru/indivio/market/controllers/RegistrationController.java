@@ -36,8 +36,8 @@ public class RegistrationController {
     }
 
     @GetMapping("/showRegistrationForm")
-    public String showMyLoginPage(Model theModel) {
-        theModel.addAttribute("systemUser", new SystemUser());
+    public String showMyLoginPage(Model model) {
+        model.addAttribute("systemUser", new SystemUser());
         return "registration-form";
     }
     @GetMapping("/showAll")
@@ -52,9 +52,8 @@ public class RegistrationController {
         return "/profile";
     }
 
-    // Binding Result после @ValidModel !!!
     @PostMapping("/processRegistrationForm")
-    public String processRegistrationForm(@Valid @ModelAttribute("systemUser") SystemUser theSystemUser, BindingResult theBindingResult, Model theModel) {
+    public String processRegistrationForm(@Valid @ModelAttribute("systemUser") SystemUser theSystemUser, BindingResult theBindingResult, Model model) {
         String userName = theSystemUser.getUserName();
         logger.debug("Processing registration form for: " + userName);
         if (theBindingResult.hasErrors()) {
@@ -62,9 +61,9 @@ public class RegistrationController {
         }
         User existing = userService.findByUserName(userName);
         if (existing != null) {
-            // theSystemUser.setUserName(null);
-            theModel.addAttribute("systemUser", theSystemUser);
-            theModel.addAttribute("registrationError", "User with current username already exists");
+            //theSystemUser.setUserName(null);
+            model.addAttribute("systemUser", theSystemUser);
+            model.addAttribute("registrationError", "User with current username already exists");
             logger.debug("User name already exists.");
             return "registration-form";
         }

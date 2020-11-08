@@ -2,112 +2,46 @@
 <html class="no-js" lang="zxx">
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Login page</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}">
-
-    <!-- CSS here -->
-    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/slicknav.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/flaticon.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/progressbar_barfiller.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/gijgo.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/animate.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/animated-headline.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/magnific-popup.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/fontawesome-all.min.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/themify-icons.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/slick.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/nice-select.css}">
-    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <meta charset="utf-8"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="#{login.page}"/>
+    <link rel="manifest" href="site.webmanifest"/>
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}"/>
+    <div th:replace="~{csslink}"/>
 </head>
 <body>
 
-
 <main class="login-body" >
-    <!-- Login Admin -->
     <form class="form-default" th:action="@{/authenticateTheUser}" method="POST">
 
         <div class="login-form">
-            <!-- logo-login -->
             <div class="logo-login">
-                <a href="index.html"><img th:src="@{/assets/img/logo/loder.png}" alt=""></a>
-            </div>
-            <h2>Login Here</h2>
-            <div class="form-input">
-                <label for="name">username</label>
-                <input  type="text" name="username" placeholder="username">
+                <a th:href="@{/}"><img th:src="@{/assets/img/logo/loder.png}" alt=""></a>
             </div>
             <div class="form-input">
-                <label for="name">Password</label>
-                <input type="password" name="password" placeholder="Password">
+                <label for="name" th:text="#{loginpage.username}"/>
+                <input  type="text" name="username" th:placeholder="#{loginpage.username}"/>
+            </div>
+            <div class="form-input">
+                <label for="name" th:text="#{loginpage.password}"/>
+                <input type="password" name="password" th:placeholder="#{loginpage.password}"/>
             </div>
             <div class="form-input pt-30">
-                <input type="submit" name="submit" value="login">
+                <input type="submit" name="submit" th:value="#{loginpage.login}">
             </div>
 
-            <!-- Forget Password -->
-            <a href="#" class="forget">Forget Password</a>
-            <!-- Forget Password -->
-            <a th:href="@{/register/showRegistrationForm}" class="registration">Registration</a>
+
+            <!--<a href="#" class="forget" th:text="#{loginpage.fogetpass}"></a>-->
+            <a th:href="@{/register/showRegistrationForm}" class="registration" th:text="#{loginpage.registration}"/>
         </div>
     </form>
-    <!-- /end login form -->
+
 </main>
 
+<div th:replace="~{scriptlink}"/>
 
-<script th:src="@{/assets/js/vendor/modernizr-3.5.0.min.js}"></script>
-<!-- Jquery, Popper, Bootstrap -->
-<script th:src="@{/assets/js/vendor/jquery-1.12.4.min.js}"></script>
-<script th:src="@{/assets/js/popper.min.js}"></script>
-<script th:src="@{/assets/js/bootstrap.min.js}"></script>
-
-
-
-<!-- Jquery Mobile Menu -->
-<script th:src="@{/assets/js/jquery.slicknav.min.js}"></script>
-
-
-<!-- Video bg -->
-<script th:src="@{/assets/js/jquery.vide.js}"></script>
-
-<!-- Jquery Slick , Owl-Carousel Plugins -->
-<script th:src="@{static/assets/js/owl.carousel.min.js}"></script>
-<script th:src="@{static/assets/js/slick.min.js}"></script>
-<!-- One Page, Animated-HeadLin -->
-<script th:src="@{static/assets/js/wow.min.js}"></script>
-<script th:src="@{static/assets/js/animated.headline.js}"></script>
-<script th:src="@{static/assets/js/jquery.magnific-popup.js}"></script>
-
-<!-- Date Picker -->
-<script th:src="@{static/assets/js/gijgo.min.js}"></script>
-<!-- Nice-select, sticky -->
-<script th:src="@{static/assets/js/jquery.nice-select.min.js}"></script>
-<script th:src="@{static/assets/js/jquery.sticky.js}"></script>
-<!-- Progress -->
-<script th:src="@{static/assets/js/jquery.barfiller.js}"></script>
-
-<!-- counter , waypoint,Hover Direction -->
-<script th:src="@{static/assets/js/jquery.counterup.min.js}"></script>
-<script th:src="@{static/assets/js/waypoints.min.js}"></script>
-<script th:src="@{static/assets/js/jquery.countdown.min.js}"></script>
-<script th:src="@{static/assets/js/hover-direction-snake.min.js}"></script>
-
-<!-- contact js -->
-<script th:src="@{static/assets/js/contact.js}"></script>
-<script th:src="@{static/assets/js/jquery.form.js}"></script>
-<script th:src="@{static/assets/js/jquery.validate.min.js}"></script>
-<script th:src="@{static/assets/js/mail-script.js}"></script>
-<script th:src="@{static/assets/js/jquery.ajaxchimp.min.js}"></script>
-
-<!-- Jquery Plugins, main Jquery -->
-<script th:src="@{static/assets/js/plugins.js}"></script>
-<script th:src="@{static/assets/js/main.js}"></script>
 
 </body>
 </html>

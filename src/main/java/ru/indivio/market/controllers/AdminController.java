@@ -23,12 +23,12 @@ public class AdminController {
         this.orderService = orderService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public String showAdminDashboard() {
         return "admin-panel";
-    }
+    }*/
 
-    @GetMapping("/orders")
+    @GetMapping("")
     public String showOrders(Model model) {
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
