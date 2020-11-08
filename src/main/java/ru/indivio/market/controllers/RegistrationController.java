@@ -69,6 +69,7 @@ public class RegistrationController {
         }
         userService.save(theSystemUser);
         logger.debug("Successfully created user: " + userName);
-        return "registration-confirmation";
+        //return "registration-confirmation";
+        return "redirect:/login";
     }
 }
