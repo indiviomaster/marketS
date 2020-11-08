@@ -17,43 +17,12 @@
     <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/img/favicon.ico}"/>
     <div th:replace="~{csslink}"/>
     <style>
-        .error {color:red}
+        .error {color:red; background: #ffffff }
     </style>
-    <!--
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    -->
+
 </head>
 
 <body>
-
-        <!--<form class="form-default" th:action="@{/authenticateTheUser}" method="POST">
-
-            <div class="login-form">
-                <div class="logo-login">
-                    <a th:href="@{/}"><img th:src="@{/assets/img/logo/loder.png}" alt=""></a>
-                </div>
-                <div class="form-input">
-                    <label for="name" th:text="#{loginpage.username}"/>
-                    <input  type="text" name="username" th:placeholder="#{loginpage.username}"/>
-                </div>
-                <div class="form-input">
-                    <label for="name" th:text="#{loginpage.password}"/>
-                    <input type="password" name="password" th:placeholder="#{loginpage.password}"/>
-                </div>
-                <div class="form-input pt-30">
-                    <input type="submit" name="submit" th:value="#{loginpage.login}">
-                </div>
-
-
-
-
-            </div>
-        </form>-->
-
-
     <main id="loginbox" class="login-body">
 
         <form class="form-default" th:action="@{/register/processRegistrationForm}" th:object="${systemUser}" method="post">
