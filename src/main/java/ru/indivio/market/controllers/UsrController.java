@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +15,7 @@ import ru.indivio.market.entites.User;
 import ru.indivio.market.services.UsrService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -41,11 +43,6 @@ public class UsrController {
         return "users-page";
     }
 
-    @GetMapping("/show/{id}")
-    public String showAll(Model model,@PathVariable(name = "id") Long id) {
-        model.addAttribute("user", usrService.findById(id));
-        return "profile";
-    }
     @GetMapping("/delete/{id}")
     public String delete(Model model,@PathVariable(name = "id") Long id) {
         usrService.delete(id);
