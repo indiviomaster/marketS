@@ -41,4 +41,9 @@ public class AdminController {
         orderService.changeOrderStatus(order, 2L);
         response.sendRedirect(request.getHeader("referer"));
     }
+    @GetMapping("/orders/delete/{id}")
+    public String deleteOrder(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Long id) throws Exception {
+        orderService.deleteById(id);
+        return "redirect:/admin";
+    }
 }

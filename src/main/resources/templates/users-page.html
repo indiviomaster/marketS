@@ -16,7 +16,7 @@
 
 <body>
 
-<!--<div th:replace="~{navigation :: navi(Users)}"/>-->
+<div th:replace="~{navigation :: navi(Users)}"/>
 
 <div class="container">
 
@@ -28,7 +28,7 @@
         <tr>
             <th>ID</th>
             <th>User Name</th>
-            <th>Password</th>
+            <!--<th>Password</th>-->
             <th>FirstNAme</th>
             <th>LastName</th>
             <th>email</th>
@@ -41,29 +41,20 @@
 
 
             <td th:text="${user.id}"/>
-            <td th:text="${user.username}"/>
-            <td th:text="${user.password}"/>
-            <td th:text="${user.first_name}"/>
-            <td th:text="${user.last_name}"/>
+            <td th:text="${user.userName}"/>
+            <!--<td th:text="${user.password}"/>-->
+            <td th:text="${user.firstName}"/>
+            <td th:text="${user.lastName}"/>
             <td th:text="${user.email}"/>
             <td>
 
-                <a sec:authorize="hasRole('ADMIN')" th:href="@{'/register/edit/' + ${user.id}}" class="btn btn-primary">Изменить</a>
-                <a sec:authorize="hasRole('ADMIN')" th:href="@{'/register/delete/' + ${user.id}}" class="btn btn-danger">Удалить</a>
+               <!-- <a  th:href="@{'/users/edit/' + ${user.id}}" class="btn btn-primary">Изменить</a>-->
+                <a  th:href="@{'/users/delete/' + ${user.id}}" class="btn btn-danger">Удалить</a>
             </td>
         </tr>
         </tbody>
     </table>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-
-            <li th:each="i : ${#numbers.sequence(1, totalPage, 1)}">
-                <a th:class="page-link" th:text="${i}" th:classappend="${page == i ? 'active' : ''}" th:href="@{'/shop/?page=' + ${i} + ${filters}}"></a>
-            </li>
-
-        </ul>
-    </nav>
 
 
 </div>

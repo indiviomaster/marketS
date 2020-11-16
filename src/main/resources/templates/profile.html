@@ -16,7 +16,7 @@
 
 <body>
 
-<div th:replace="~{navigation :: navi(Profile)}" />
+<!--<div th:replace="~{navigation :: navi(Profile)}" />-->
 
 <div class="container">
     <br>
@@ -28,7 +28,8 @@
 
         <div class="col form-group">
             <label>Имя</label>
-            <input th:field="@{user.userName}" type="text" class="form-control" th:rows="3" placeholder="">
+
+            <input name = "userName" type="text" class="form-control" placeholder="" value="@{user.userName}">
 
         </div>
     </div>

@@ -60,4 +60,8 @@ public class OrderService {
         order.setStatus(orderStatusService.getStatusById(statusId));
         return saveOrder(order);
     }
+
+    public void deleteById(Long id) {
+        orderRepository.deleteById(id);
+    }
 }

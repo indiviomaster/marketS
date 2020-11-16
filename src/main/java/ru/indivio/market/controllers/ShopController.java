@@ -31,6 +31,12 @@ public class ShopController {
     private ProductService productService;
     private ShoppingCartService shoppingCartService;
     private DeliveryAddressService deliverAddressService;
+    private CategoryService categoryService;
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -98,6 +104,14 @@ public class ShopController {
         model.addAttribute("max", max);
         model.addAttribute("word", word);
         return "shop-page";
+    }
+
+    @GetMapping("/show/{id}")
+    public String show(Model model, @PathVariable(name = "id") Long id) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categoryService.getCategoryById(product.getCategory().getId()));
+        return "show-product";
     }
 
     @GetMapping("/cart/add/{id}")

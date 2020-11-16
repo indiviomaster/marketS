@@ -30,7 +30,8 @@
         <input th:value="${max != null} ? ${max}" th:name="max" type="number" placeholder="Максимальная цена">
         <button type="submit" class="btn btn-primary">Фильтровать</button>
     </form>
-
+    <br>
+    <a sec:authorize="hasRole('ADMIN')" th:href="@{'/products/edit/0'}" class="btn btn-primary">Добавить товар</a>
     <br>
 
     <h1 th:text="#{products.list}" />
@@ -55,14 +56,18 @@
             <td>
                 <img th:if="${product.images.size() > 0}" width="40" height="40" th:src="@{'../images/' + ${product.images[0].path}}" />
             </td>
-            <td th:text="${product.title}"/>
+
+            <td><a th:href="@{'/shop/show/' + ${product.id}}" th:text="${product.title}"/></td>
             <td th:text="${product.price}"/>
             <td>
 
+                <!--<a  th:href="@{'/products/show/' + ${product.id}}" class="btn btn-primary">Показать</a>-->
                 <a  th:href="@{'/shop/cart/add/' + ${product.id}}" class="btn btn-primary">Добавить в корзину</a>
-                <a sec:authorize="hasRole('ADMIN')" th:href="@{'/products/edit/' + ${product.id}}" class="btn btn-primary">Изменить товар</a>
+                <!--<a sec:authorize="hasRole('ADMIN')" th:href="@{'/products/edit/' + ${product.id}}" class="btn btn-primary">Изменить товар</a>-->
                 <a sec:authorize="hasRole('ADMIN')" th:href="@{'/products/delete/' + ${product.id}}" class="btn btn-danger">Удалить товар</a>
             </td>
+
+
         </tr>
         </tbody>
     </table>
