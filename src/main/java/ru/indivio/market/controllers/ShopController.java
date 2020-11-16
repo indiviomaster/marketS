@@ -121,6 +121,13 @@ public class ShopController {
         return "redirect:" + referrer;
     }
 
+    @GetMapping("/cart/delete/{id}")
+    public String deleteProductFromCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
+        shoppingCartService.removeFromCart(httpServletRequest.getSession(), id);
+        return "redirect:/cart";
+    }
+
+
     @GetMapping("/order/fill")
     public String orderFill(Model model, HttpServletRequest httpServletRequest, Principal principal) {
         if (principal == null) {
