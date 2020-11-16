@@ -20,8 +20,9 @@
 
 
 <div class="fluid-container" th:fragment="navi(activeTab)">
+
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary ">
-        <a class="navbar-brand" th:href="@{/}">Market</a>
+        <a th:href="@{/}"><img height="30px" th:src="@{/assets/img/logo/loder.png}"/></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item" th:classappend="${activeTab == 'Shop' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/shop/?page=1}">Товары<span
+                    <a class="nav-link" th:href="@{'/shop/?page=1'}">Товары<span
                             class="sr-only">(current)</span></a>
                 </li>
 
@@ -42,24 +43,22 @@
                     th:classappend="${activeTab == 'Categories' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/categories}">Категории</a>
                 </li>
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item"
+                <!--<li sec:authorize="hasRole('ADMIN')" class="nav-item"
                     th:classappend="${activeTab == 'AddRole' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/roles}">Роли</a>
-                </li>
-
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item"
-                    th:classappend="${activeTab == 'Products' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/products/edit/0}">Добавить товар</a>
-                </li>
+                </li>-->
 
                 <li sec:authorize="isAuthenticated()" class="nav-item"
                     th:classappend="${activeTab == 'Profile' ? 'active' : ''}">
                     <a class="nav-link" th:href="@{/profile}">Профиль</a>
                 </li>
-
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item"
+                    th:classappend="${activeTab == 'Users' ? 'active' : ''}">
+                    <a class="nav-link" th:href="@{/users}">Пользователи</a>
+                </li>
                 <li sec:authorize="hasRole('ADMIN')" class="nav-item"
                     th:classappend="${activeTab == 'AdminDashboard' ? 'active' : ''}">
-                    <a class="nav-link" th:href="@{/admin}">Админка</a>
+                    <a class="nav-link" th:href="@{/admin}">Заказы</a>
                 </li>
 
                 <!--Logout-->

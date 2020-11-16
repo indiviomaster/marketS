@@ -31,6 +31,12 @@ public class ShopController {
     private ProductService productService;
     private ShoppingCartService shoppingCartService;
     private DeliveryAddressService deliverAddressService;
+    private CategoryService categoryService;
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -100,12 +106,27 @@ public class ShopController {
         return "shop-page";
     }
 
+    @GetMapping("/show/{id}")
+    public String show(Model model, @PathVariable(name = "id") Long id) {
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("categories", categoryService.getCategoryById(product.getCategory().getId()));
+        return "show-product";
+    }
+
     @GetMapping("/cart/add/{id}")
     public String addProductToCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
         shoppingCartService.addToCart(httpServletRequest.getSession(), id);
         String referrer = httpServletRequest.getHeader("referer");
         return "redirect:" + referrer;
     }
+
+    @GetMapping("/cart/delete/{id}")
+    public String deleteProductFromCart(Model model, @PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
+        shoppingCartService.removeFromCart(httpServletRequest.getSession(), id);
+        return "redirect:/cart";
+    }
+
 
     @GetMapping("/order/fill")
     public String orderFill(Model model, HttpServletRequest httpServletRequest, Principal principal) {
