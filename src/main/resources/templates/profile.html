@@ -36,9 +36,21 @@
         <div th:text="${profile.email}"/>
         <div class="card-header">Роли</div>
         <div th:each = "rol : ${profile.roles}">
-            <div th:text="${rol.getName()}">
-            <div/>
-
+            <div th:text="${rol.getName()}"></div>
+        </div>
+        <div class="card-header">Адреса доставки</div>
+        <div th:each = "adres : ${addresses}">
+            <div th:text="${adres.address}"></div>
+        </div>
+        <!--<div>
+            <form th:action="@{/profile/address}" method="post">
+            <div class="form-input">
+                <label for="name" text="Введите адрес"/>
+                <input type="text" name="adr" placeholder="Введите адрес" class="form-control"/>
+            </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>-->
     </div>
 
 </div>

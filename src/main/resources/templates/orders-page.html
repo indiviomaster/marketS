@@ -38,11 +38,14 @@
             <td>
                 <span th:if="${order.status.id == 1}" th:text="${order.status.title}" class="badge badge-danger" />
                 <span th:if="${order.status.id == 2}" th:text="${order.status.title}" class="badge badge-primary" />
+                <span th:if="${order.status.id == 3}" th:text="${order.status.title}" class="badge badge-secondary" />
             </td>
             <td th:text="${order.createAt}"/>
             <td>
-                <!--<a th:if="${order.status.id == 1}" th:href="@{'/admin/orders/ready/' + ${order.id}}" class="btn btn-primary" >Заказ отправлен</a>
-                <a th:href="@{'/admin/orders/info/' + ${order.id}}" class="btn btn-secondary" >Информация</a>-->
+                <!--<a th:if="${order.status.id == 1}" th:href="@{'/admin/orders/ready/' + ${order.id}}" class="btn btn-primary" >Заказ отправлен</a>-->
+                <a th:href="@{'/admin/orders/info/' + ${order.id}}" class="btn btn-secondary" >Информация</a>
+                <a th:href="@{'/admin/orders/sent/' + ${order.id}}" class="btn btn-primary" >Отправлен</a>
+                <a th:href="@{'/admin/orders/received/' + ${order.id}}" class="btn btn-secondary" >Получен</a>
                 <a th:href="@{'/admin/orders/delete/' + ${order.id}}" class="btn btn-danger" >Удалить</a>
             </td>
         </tr>

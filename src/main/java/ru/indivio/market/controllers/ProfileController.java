@@ -7,11 +7,10 @@ import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import ru.indivio.market.entites.DeliveryAddress;
 import ru.indivio.market.entites.User;
+import ru.indivio.market.services.DeliveryAddressService;
 import ru.indivio.market.services.UsrService;
 
 import java.security.Principal;
@@ -20,6 +19,13 @@ import java.util.List;
 @Controller
 public class ProfileController {
     private UsrService usrService;
+
+    private DeliveryAddressService deliverAddressService;
+
+    @Autowired
+    public void setDeliverAddressService(DeliveryAddressService deliverAddressService) {
+        this.deliverAddressService = deliverAddressService;
+    }
 
     @Autowired
     public void setUserServiceImpl(UsrService usrService) {
@@ -30,10 +36,20 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String showProfile(Model model, Principal principal) {
-
-        model.addAttribute("profile", usrService.findByName(principal.getName()));
-        //model.addAttribute("profiles", "123");
+        User user = usrService.findByName(principal.getName());
+        model.addAttribute("profile", user);
+        model.addAttribute("addresses",deliverAddressService.getUserAddresses(user.getId()));
         return "profile";
+    }
+    @PostMapping("/profile/address?{adr}")
+
+    public String addAddress(Model model, @PathVariable(name = "adr") String address, Principal principal) {
+        User user = usrService.findByName(principal.getName());
+        DeliveryAddress deliveryAddress = new DeliveryAddress();
+        deliveryAddress.setAddress(address);
+        deliveryAddress.setUser(user);
+        deliverAddressService.save(deliveryAddress);
+        return "redirect:/profile";
     }
 
 }

@@ -46,7 +46,7 @@ CREATE TABLE categories (
   title                 VARCHAR(255) NOT NULL,
   description           VARCHAR(5000),
   PRIMARY KEY (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS products;
 
@@ -63,7 +63,7 @@ CREATE TABLE products (
   PRIMARY KEY (id),
   CONSTRAINT FK_CATEGORY_ID FOREIGN KEY (category_id)
   REFERENCES categories (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS products_images;
 
@@ -74,7 +74,7 @@ CREATE TABLE products_images (
   PRIMARY KEY (id),
   CONSTRAINT FK_PRODUCT_ID_IMG FOREIGN KEY (product_id)
   REFERENCES products (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS orders_statuses;
 
@@ -82,7 +82,7 @@ CREATE TABLE orders_statuses (
   id                    INT(11) NOT NULL AUTO_INCREMENT,
   title                 VARCHAR(50) DEFAULT NULL,
   PRIMARY KEY (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS delivery_addresses;
 
@@ -93,7 +93,7 @@ CREATE TABLE delivery_addresses (
   PRIMARY KEY (id),
   CONSTRAINT FK_USER_ID_DEL_ADR FOREIGN KEY (user_id)
   REFERENCES users (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS orders;
 
@@ -115,7 +115,7 @@ CREATE TABLE orders (
   REFERENCES orders_statuses (id),
   CONSTRAINT FK_DELIVERY_ADDRESS_ID FOREIGN KEY (delivery_address_id)
   REFERENCES delivery_addresses (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 DROP TABLE IF EXISTS orders_item;
 
@@ -131,7 +131,7 @@ CREATE TABLE orders_item (
   REFERENCES orders (id),
   CONSTRAINT FK_PRODUCT_ID_ORD_IT FOREIGN KEY (product_id)
   REFERENCES products (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -146,19 +146,12 @@ VALUES
 ('nik','$2a$10$4p6U8Ve1ZjJ/S0Qd9RFyB.hJjpusgdYmTtIIqpHs3k0hfbhDe6cyq','nik','nik','nik@gmail.com');
 INSERT INTO users_roles (user_id, role_id)
 VALUES
-(1, 1),
-(1, 2),
-(2, 1),
-(2, 2),
+(1, 1), (1, 2),
+(2, 1), (2, 2),
 (3, 1);
 
-INSERT INTO categories (title)
-VALUES
-("Телевизоры"), ("Ноутбуки");
-
-INSERT INTO orders_statuses (title)
-VALUES
-("Сформирован");
+INSERT INTO categories (title) VALUES ("Телевизоры"), ("Ноутбуки");
+INSERT INTO orders_statuses (title) VALUES ("Сформирован"),("Отправлен"), ("Получен");
 
 INSERT INTO products (category_id, vendor_code, title, short_description, full_description, price)
 VALUES
@@ -177,9 +170,11 @@ VALUES
 
 INSERT INTO products_images (product_id, path)
 VALUES
-(2, "2.jpg");
+(2, "2.jpg"),(3, "3.jpg");
 
 INSERT INTO delivery_addresses (user_id, address)
 VALUES
 (1, "18a Diagon Alley"),
-(1, "4 Privet Drive");
+(1, "4 Privet Drive"),
+(2, "4 Privet Drive"),
+(3, "5 Mozaic Drive");
